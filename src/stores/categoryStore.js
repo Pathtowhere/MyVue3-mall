@@ -8,6 +8,8 @@ export const useCategoryStore = defineStore('category', () => {
     categoryList.value = res.result;//res不是ref,这里就算写ref也不是上边的ref
   }
 
+  
+
   onMounted(() => {
     getCategory();
   })
