@@ -1,4 +1,9 @@
 <script setup>
+import HeaderCart from './HeaderCart.vue';
+import { useCategoryStore } from '@/stores/categoryStore';
+const categoryStore = useCategoryStore();
+
+
 
 </script>
 
@@ -12,16 +17,18 @@
         <li class="home">
           <RouterLink to="/">首页</RouterLink>
         </li>
-        <li> <RouterLink to="/">居家</RouterLink> </li>
-        <li> <RouterLink to="/">美食</RouterLink> </li>
-        <li> <RouterLink to="/">服饰</RouterLink> </li>
+        <!-- 通过api渲染 -->
+        <li v-for="item in categoryStore.categoryList" :key="item.id">
+          <!-- 模板字符串``, active-class高亮显示 -->
+          <RouterLink active-class="active" :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
+        </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
-      
+      <HeaderCart />
     </div>
   </header>
 </template>

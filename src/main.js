@@ -1,19 +1,22 @@
-import '@/styles/common.scss'
+import "@/styles/common.scss";
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-import App from './App.vue'
-import router from './router'
-import { getCategoryAPI } from './apis/testApi'
+import App from "./App.vue";
+import router from "./router";
+import { lazyPlugin } from "./directives";
+import { componentPlugin } from "./components";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
-const app = createApp(App)
+const app = createApp(App);
+const pinia = createPinia();
+app.use(pinia)
+pinia.use(piniaPluginPersistedstate)
 
-app.use(createPinia())
-app.use(router)
+//app.use(createPinia());
+app.use(router);
+app.use(lazyPlugin)
+app.use(componentPlugin)
 
-getCategoryAPI().then(res => {
-  console.log(res)
-})
-
-app.mount('#app')
+app.mount("#app");
